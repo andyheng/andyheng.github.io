@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reinstall.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="reinstalling-cardwatch-v11r3">Reinstalling Cardwatch V11R3</h1>
+<h2 id="uninstall-process">Uninstall Process</h2>
+<p>Navigate to Apps &amp; Features, and locate <strong>Cardwatch V11 R3</strong>.
+<img src="./img/1.png" alt="Start menu">
+<img src="./img/2.png" alt="settings">
+<img src="./img/3.png" alt="app"></p>
+<p>Select Uninstall, and proceed with the uninstallation process.
+<img src="./img/4.png" alt="">
+<img src="./img/5.png" alt=""></p>
+<p>Select <strong>Remove: Remove all installed features</strong>, and proceed.
+<img src="./img/6.png" alt="">
+<img src="./img/7.png" alt="">
+<img src="./img/8.png" alt="">
+<img src="./img/9.png" alt=""></p>
+<h2 id="install-process">Install Process</h2>
+<p>Extract the installation files from the zipped folder.
+<img src="./img/42.png" alt="">
+<img src="./img/43.png" alt="">
+<img src="./img/44.png" alt=""></p>
+<p>Locate the <strong>unzipped</strong> Cardwatch V11R3 installation folder, and run the setup as administrator.
+<img src="./img/10.png" alt="">
+<img src="./img/11.png" alt="">
+<img src="./img/12.png" alt=""></p>
+<p>Proceed with the installation
+<img src="./img/13.png" alt="">
+<img src="./img/14.png" alt=""></p>
+<p>Ensure that  <strong>11.7</strong> is the selected version of Progress.
+<img src="./img/15.png" alt=""></p>
+<p>Set the desired user and company name, and proceed with the rest of the installation.
+<img src="./img/16.png" alt="">
+<img src="./img/17.png" alt="">
+<img src="./img/18.png" alt=""></p>
+<p>The installation will proceed to the Cardwatch settings setup.</p>
+<p>For icons to create: If both Back Office and a register / terminal are required on the device, select <strong>Both</strong>.
+<img src="./img/19.png" alt=""></p>
+<p>If a register is required, the setup will ask which type to create. For our purposes, select <strong>Fine Dining</strong>, and proceed.
+<img src="./img/20.png" alt="">
+<img src="./img/21.png" alt=""></p>
+<p>Under Host (Server) Name:</p>
+<ul>
+<li>For testing / staging purposes, enter <strong>fooddb.algcde.com</strong>.</li>
+<li>For live / production purposes, enter <strong>foodservdb.algcde.com</strong>.
+<ul>
+<li><strong>NOTE:</strong> If entering <strong>foodservdb.algcde.com</strong> and proceeding with the rest of the setup returns a &quot;login&quot; error, then temporarily set the server name to <strong>fooddb.algcde.com</strong>. The server name will need to be manually edited in the .pf files after the installation.</li>
+</ul>
+</li>
+</ul>
+<p><img src="./img/22.png" alt=""></p>
+<p><strong>Database Information</strong>:</p>
+<ul>
+<li><strong>CDW Database</strong> can be left as its default values: <strong>ServerCdw</strong> and Port <strong>3021</strong>.</li>
+<li><strong>POS Database</strong>, if for the main food service, can be left as its default values: <strong>ServerPos</strong> and Port <strong>3031</strong>.
+<ul>
+<li>For <strong>Student Association</strong> devices, use <strong>POS Database</strong>:  <strong>ServerPosA</strong> and Port <strong>3041</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><img src="./img/24.png" alt=""></p>
+<p>Under <strong>REP Database</strong>, enter <strong>ServerRep</strong> and Port <strong>3031</strong>, and complete the installation.
+<img src="./img/23.png" alt="">
+<img src="./img/25.png" alt="">
+<img src="./img/26.png" alt="">
+<img src="./img/27.png" alt=""></p>
+<h3 id="how-to-update-server-names">How to Update Server Names</h3>
+<p>Locate the CardwatchV11R3 install folder, and the relevant pf files.</p>
+<ul>
+<li>The PF files most commonly required are <strong>CdwOffice</strong> for Back Office use, and <strong>FineDining</strong> for register devices.
+<img src="./img/28.png" alt="">
+<img src="./img/29.png" alt="">
+<img src="./img/30.png" alt=""></li>
+</ul>
+<p>Open the PF file with Notepad.
+<img src="./img/31.png" alt="">
+<img src="./img/32.png" alt="">
+<img src="./img/33.png" alt=""></p>
+<p>Edit the host / server name for all databases to the desired / correct name, and save the file.
+<img src="./img/34.png" alt="">
+<img src="./img/35.png" alt=""></p>
+<p>Repeat this process for any other required PF files as needed.</p>
+<h2 id="updating-location-and-terminals">Updating Location and Terminals</h2>
+<p>Locate the CardwatchV11R3 install folder, and the PF file connected to the register shortcut.</p>
+<ul>
+<li>The locations and terminals are edited in the <strong>FineDining</strong> PF file.</li>
+</ul>
+<p><img src="./img/28.png" alt="">
+<img src="./img/29.png" alt="">
+<img src="./img/36.png" alt=""></p>
+<p>Open the PF file with Notepad.
+<img src="./img/37.png" alt="">
+<img src="./img/38.png" alt=""></p>
+<p>Locate the <strong>Location Number &amp; Terminal Number</strong> line, and enter the desired location number and terminal number separated by a comma.
+<img src="./img/39.png" alt="">
+<img src="./img/40.png" alt=""></p>
+<p>Save the changes and exit.
+<img src="./img/41.png" alt=""></p>
+
+</body>
+</html>
